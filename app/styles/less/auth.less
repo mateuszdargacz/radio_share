@@ -81,7 +81,7 @@
     }
   }
 
-  .registration-form-section{
+  .registration-form-section {
     max-width: 620px;
     margin: 0 auto;
     width: 100%;
@@ -90,11 +90,50 @@
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
       padding: 10px 20px;
 
-      h3{
+      h3 {
         font-family: 'Roboto', 'PT Sans', sans-serif;
         font-weight: 300;
       }
     }
+    .textbox-wrap {
+      padding: 20px 20px 20px 15px;
+      margin-top: 5px;
+      border-left: 5px solid transparent;
+      transition: border-left-color 0.5s, box-shadow 0.5s, background-color 0.5s;
+      background-color: #464646;
+
+      .input-group {
+        border: 1px solid #464646;
+        background-color: #383838;
+        position: relative;
+        display: table;
+        border-collapse: separate;
+        .input-group-addon {
+          border-radius: 0;
+          padding: 6px 12px;
+          font-size: 14px;
+          font-weight: normal;
+          line-height: 1;
+          text-align: center;
+          width: 1%;
+          white-space: nowrap;
+          vertical-align: middle;
+          display: table-cell;
+          background-color: transparent;
+          border: none;
+          color: #beccba;
+
+        }
+        .form-control {
+          box-shadow: none;
+          outline: none;
+          background-color: transparent;
+          border: none;
+          border-radius: 0;
+        }
+      }
+    }
+
     .registration-left-section, .registration-right-section {
       padding-left: 0;
       padding-right: 2.5px;
@@ -114,7 +153,7 @@
             position: relative;
             display: table;
             border-collapse: separate;
-            .input-group-addon{
+            .input-group-addon {
               border-radius: 0;
               padding: 6px 12px;
               font-size: 14px;
@@ -130,7 +169,7 @@
               color: #beccba;
 
             }
-            .form-control{
+            .form-control {
               box-shadow: none;
               outline: none;
               background-color: transparent;
@@ -141,7 +180,10 @@
         }
       }
     }
-    .registration-form-action{
+    .registration-right-section {
+      padding: 0 0 0 3px;
+    }
+    .registration-form-action {
       background-color: #464646;
       margin-top: 5px;
       padding: 20px;
@@ -151,37 +193,35 @@
 
 }
 
+.animate-enter,
+.animate-leave {
+  -webkit-transition: 1400ms cubic-bezier(0.785, 0.135, 0.150, 0.860) all;
+  -moz-transition: 1400ms cubic-bezier(0.785, 0.135, 0.150, 0.860) all;
+  -ms-transition: 1400ms cubic-bezier(0.785, 0.135, 0.150, 0.860) all;
+  -o-transition: 1400ms cubic-bezier(0.785, 0.135, 0.150, 0.860) all;
+  transition: 1400ms cubic-bezier(0.785, 0.135, 0.150, 0.860) all;
+  position: relative;
+  display: block;
+}
 
-.rotate {
-    -webkit-animation-duration: 1s;
+.animate-leave.animate-leave-active,
+.animate-enter {
+  -webkit-transform: rotateX(90deg) rotateZ(90deg);
+  -moz-transform: rotateX(90deg) rotateZ(90deg);
+  -ms-transform: rotateX(90deg) rotateZ(90deg);
+  -o-transform: rotateX(90deg) rotateZ(90deg);
+  transform: rotateX(90deg) rotateZ(90deg);
+  opacity: 0;
+  height: 0px;
 }
-.ng-leave.rotate {
-    -webkit-animation-name: rotate-leave;
-}
-.ng-enter.rotate {
-    -webkit-animation-name: rotate-enter;
-}
-@-webkit-keyframes rotate-leave {
-    0% {
-        -webkit-transform-origin: center center;
-        -webkit-transform: rotate(0);
-        opacity: 1;
-    }
-    100% {
-        -webkit-transform-origin: center center;
-        -webkit-transform: rotate(-180deg);
-        opacity: 0;
-    }
-}
-@-webkit-keyframes rotate-enter {
-    0% {
-        -webkit-transform-origin: center center;
-        -webkit-transform: rotate(-180deg);
-        opacity: 0;
-    }
-    100% {
-        -webkit-transform-origin: center center;
-        -webkit-transform: rotate(-360deg);
-        opacity: 1;
-    }
+
+.animate-enter.animate-enter-active,
+.animate-leave {
+  -webkit-transform: rotateX(0deg) rotateZ(0deg);
+  -moz-transform: rotateX(0deg) rotateZ(0deg);
+  -ms-transform: rotateX(0deg) rotateZ(0deg);
+  -o-transform: rotateX(0deg) rotateZ(0deg);
+  transform: rotateX(0deg) rotateZ(0deg);
+  opacity: 1;
+  height: 30px;
 }

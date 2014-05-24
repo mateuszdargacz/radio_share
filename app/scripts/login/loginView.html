@@ -1,29 +1,36 @@
-<div class="eternity-form">
+<div class="eternity-form" ng-controller="loginCtrl">
     <section class="container">
         <div class="col-md-4 col-md-offset-4">
             <div class="login-form-section">
                 <div class="login-content " data-animation="bounceIn">
-                    <form>
+                    <form name="login">
                         <div class="section-title">
-                            <h3>LogIn to your Account</h3>
+                            <h3>LogIn to Radioculus!</h3>
                         </div>
                         <div class="textbox-wrap">
                             <div class="input-group">
                                 <span class="input-group-addon "><i class="icon-user icon-color"></i></span>
-                                <input type="text" required="required" class="form-control" placeholder="Username"/>
+                                <input type="text" name="username" class="form-control" placeholder="Username"/>
                             </div>
                         </div>
                         <div class="textbox-wrap">
                             <div class="input-group">
                                 <span class="input-group-addon "><i class="icon-key icon-color"></i></span>
-                                <input type="password" required="required" class="form-control "
+                                <input type="password" name="password" class="form-control"
                                        placeholder="Password"/>
+                            </div>
+                        </div>
+                        <div class="textbox-wrap" ng-show="form_error.error">
+                            <div class="form-error blue">
+                                <p>{{form_error.text}}</p>
                             </div>
                         </div>
                         <div class="login-form-action clearfix">
 
-                            <button type="submit" class="btn btn-success pull-right btn-white">LogIn &nbsp; <i
-                                    class="icon-chevron-right"></i></button>
+                            <button type="submit" ng-click="my_login('safs')"
+                                    class="btn btn-success pull-right btn-white">LogIn &nbsp; <i
+                                    class="icon-chevron-right"></i>
+                            </button>
                         </div>
                     </form>
                 </div>

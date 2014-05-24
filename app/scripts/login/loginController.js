@@ -1,69 +1,54 @@
 'use strict';
 
-angular.module( 'radio_share' )
-    .controller( 'loginCtrl', [ '$scope', 'socket', '$location', '$window', function( $scope, socket, $location, $window ) {
-
-        $scope.awesomeClientThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma',
-            'jQuery',
-            'UI-Bootstrap',
-            'Font-Awesome',
-            'Modernizr',
-            'lodash'
-        ];
-
-        $scope.awesomeServerThings = [
-            'Express',
-            'Hogan',
-            'Socket.io',
-            'MongoDB'
-        ];
-
-        $scope.isCollapsed = true;
-
-        $scope.collapseText = 'Open';
-
-        $scope.collapseIcon = 'icon-chevron-down';
-
-        $scope.collapse = function() {
-            $scope.isCollapsed = !$scope.isCollapsed;
-
-            if ($scope.isCollapsed) {
-                $scope.collapseText = 'Open';
-                $scope.collapseIcon = 'icon-chevron-down';
-            } else {
-                $scope.collapseText = 'Close';
-                $scope.collapseIcon = 'icon-chevron-up';
-            }
+angular.module('radio_share')
+    .controller('loginCtrl', [ '$scope', 'socket', '$location', '$window', '$http', function ($scope, socket, $location, $window, $http) {
+        $.fn.serializeObject = function () {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function () {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
         };
 
-        $scope.connectedClass = 'icon-remove';
-        $scope.connected = 'Not Connected to Server';
-
-        socket.on( 'send:onConnect', function( data ) {
-            $scope.connected = data.data;
-            $scope.connectedClass = 'icon-link';
-        } );
-
-        $scope.socketExample = function() {
-            console.log('sending event to socket');
-            socket.emit( 'send:example', {
-                data: 'example'
-            } );
+        $scope.form_error = {
+            text: '',
+            error: false
         };
+        $scope.my_login = function () {
 
-        socket.on( 'send:example', function( data ) {
-            console.log('client socket on');
+            var responsePromise = $http({
+                method: 'POST',
+                url: '/login',
+                data: $('form[name="login"]').serializeObject(),
+                json: true,
+                headers: {'Content-Type': 'application/json'}
+            });
+            responsePromise.success(function (data, status, headers, config) {
+                if (data.success) {
+                    $scope.form_error.error = false;
+                    $location.path("/main");
+                } else if (data.error) {
+                    $scope.form_error = {
+                        text: data.error,
+                        error: true
+                    };
+                }
 
-            $('.hero-unit').css( 'background-color', '#DC002A' );
-        } );
-
-        $scope.redirect = function( path ) {
-            console.log('attempting to redirect to ' + path );
-//            $location.path( path );
-            $window.location.href = path;
+            });
+            responsePromise.error(function (data, status, headers, config) {
+                $scope.form_error = {
+                    text: data.error,
+                    error: true
+                };
+            });
         };
 
     }]);

@@ -7,8 +7,9 @@ var mongo       = require( 'mongodb' ),
     createDummyCollection;
 
 // Create mongo server
+module.exports.appConfig = appConfig;
 var server  = new mongo.Server( appConfig.database.host, appConfig.database.port, { auto_reconnect: true } ),
-    client  = module.exports = new mongo.MongoClient( server );
+    client = module.exports.client = new mongo.MongoClient(server);
 
 // Open a client to mongo
 client.open( function( err, client ) {

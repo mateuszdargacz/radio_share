@@ -1,10 +1,11 @@
 <div class="eternity-form">
-<section class="colorBg5 colorBg dark" id="demo5" data-panel="fifth">
+    <section class="colorBg5 colorBg dark" id="demo5" data-panel="fifth">
         <div class=" container">
-            <br />
-            <br />
+            <br/>
+            <br/>
+
             <div class="registration-form-section">
-                <form>
+                <form name="register">
                     <div class="section-title reg-header " data-animation="fadeInDown">
                         <h3 class="blue">Get your Account Here </h3>
                     </div>
@@ -14,19 +15,19 @@
                                 <div class="textbox-wrap">
                                     <div class="input-group">
                                         <span class="input-group-addon "><i class="icon-user icon-color"></i></span>
-                                        <input type="text" class="form-control " placeholder="FirstName" required="required" />
+                                        <input type="text" name="name" class="form-control " placeholder="FirstName"/>
                                     </div>
                                 </div>
                                 <div class="textbox-wrap">
                                     <div class="input-group">
                                         <span class="input-group-addon "><i class="icon-user icon-color"></i></span>
-                                        <input type="text" class="form-control " placeholder="LastName" required="required" />
+                                        <input type="text" class="form-control" name="surname" placeholder="LastName"/>
                                     </div>
                                 </div>
                                 <div class="textbox-wrap">
                                     <div class="input-group">
                                         <span class="input-group-addon "><i class="icon-envelope icon-color"></i></span>
-                                        <input type="email" class="form-control " placeholder="Email Id" required="required" />
+                                        <input type="email" class="form-control " name="email" placeholder="Email Id"/>
                                     </div>
                                 </div>
 
@@ -38,31 +39,43 @@
                                 <div class="textbox-wrap">
                                     <div class="input-group">
                                         <span class="input-group-addon "><i class="icon-user icon-color"></i></span>
-                                        <input type="text" class="form-control " placeholder="UserName" required="required" />
+                                        <input type="text" class="form-control " name="username"
+                                               placeholder="UserName"/>
                                     </div>
                                 </div>
                                 <div class="textbox-wrap">
                                     <div class="input-group">
                                         <span class="input-group-addon "><i class="icon-key icon-color"></i></span>
-                                        <input type="password" class="form-control " placeholder="Password" required="required" />
+                                        <input type="password" class="form-control " name="password"
+                                               placeholder="Password"/>
                                     </div>
                                 </div>
                                 <div class="textbox-wrap">
                                     <div class="input-group">
                                         <span class="input-group-addon "><i class="icon-key icon-color"></i></span>
-                                        <input type="password" class="form-control " placeholder="Confirm-Password" required="required" />
+                                        <input type="password" class="form-control " name="password2"
+                                               placeholder="Confirm-Password"/>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
-                    <div class="registration-form-action clearfix " data-animation="fadeInUp" data-animation-delay=".15s">
+                    <div ng-show="form_error.error" ng-animate>
+                        <div class="textbox-wrap">
+                            <div class="form-error blue">
+                                <p>{{form_error.text}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="registration-form-action clearfix " data-animation="fadeInUp"
+                         data-animation-delay=".15s">
                         <a href="/login" class="btn btn-success pull-left btn-white ">
                             <i class="icon-chevron-left"></i>&nbsp; &nbsp;Back To Login
                         </a>
-                        <button type="submit" class="btn btn-success pull-right btn-white">Register Now &nbsp; <i class="icon-chevron-right"></i></button>
+
+                        <button type="submit" ng-click="my_register()" class="btn btn-success pull-right btn-white">
+                            Register Now &nbsp; <i class="icon-chevron-right"></i></button>
 
                     </div>
                 </form>
