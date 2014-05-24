@@ -1,0 +1,23 @@
+.blue {
+  color: #34dbce;
+}
+.blue-dark {
+  color: #3498db;
+}
+.btn-white {
+  background-color: #ffffff;
+  color: #464646;
+  transition: border-left-color 0.5s, box-shadow 0.5s, background-color 0.5s;
+  border-color: #464646;
+}
+.btn-white:hover {
+  background-color: #464646;
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+  transition: border-left-color 0.5s, box-shadow 0.5s, background-color 0.5s;
+}
+.form-error {
+  font-family: 'Roboto', 'PT Sans', sans-serif;
+  font-weight: 300;
+  transition: width 1s linear;
+}
