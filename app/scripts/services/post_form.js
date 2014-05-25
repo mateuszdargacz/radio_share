@@ -3,12 +3,18 @@ angular.module('radio_share')
     .factory("postForm", function ($http) {
         var vars = {
             url: '',
-            data: ''
+            data: '',
+            callback: function () {
+                return "Please provide callback function"
+            }
         };
         return {
             set_vars: function (url, data) {
                 vars.url = url;
                 vars.data = data;
+            },
+            set_callback: function (fun) {
+                vars.callback = fun;
             },
             make_request: function () {
                 $.fn.serializeObject = function () {
@@ -28,7 +34,7 @@ angular.module('radio_share')
                 };
 
                 var form_state = {
-                    error: false,
+                    error: true,
                     text: ''
                 };
                 var responsePromise = $http({
@@ -39,25 +45,23 @@ angular.module('radio_share')
                     headers: {'Content-Type': 'application/json'}
                 });
                 responsePromise.success(function (data, status, headers, config) {
-                    console.log('asssa', data)
                     if (data.success) {
                         form_state.error = false;
-                        alert(data.aiggght)
                     } else if (data.error) {
                         form_state = {
-                            text: data.error,
-                            error: true
+                            text: data.text,
+                            error: data.error
                         };
                     }
-
+                    vars.callback(form_state);
                 });
                 responsePromise.error(function (data, status, headers, config) {
                     form_state = {
-                        text: data.error,
+                        text: "server connection error",
                         error: true
                     };
+                    vars.callback(form_state);
                 });
-                return form_state;
             }
 
         }

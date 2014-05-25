@@ -20,9 +20,9 @@
                                        placeholder="Password"/>
                             </div>
                         </div>
-                        <div class="textbox-wrap" ng-show="form_error.error">
-                            <div class="form-error blue">
-                                <p>{{form_error.text}}</p>
+                        <div class="textbox-wrap no-padding" ng-show="form_error.error">
+                            <div class="form-error blue-dark">
+                            <p>{{form_error.text}}</p>
                             </div>
                         </div>
                         <div class="login-form-action clearfix">
@@ -35,7 +35,7 @@
                     </form>
                 </div>
                 <div class="login-form-links link1 " data-animation="fadeInRightBig" data-animation-delay=".2s">
-                    <h4 class="blue">Don't have an Account?</h4>
+                    <h4 class="blue" ng-click="socketExample()">Don't have an Account?</h4>
                     <span>No worry</span>
                     <a href="/register" class="blue">Click Here</a>
                     <span>to Register</span>

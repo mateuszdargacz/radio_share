@@ -8,11 +8,13 @@ module.exports = function (req, res) {
 
     console.log('Accessing database ' + db.databaseName);
 
-    db.collection(appConfig.database.collection, function (err, collection) {
+    db.collection(appConfig.database.user_collection, function (err, collection) {
         if (err) {
             console.log('Error accessing collection');
             console.log(err);
-            return err;
+            res.json({
+                error: err
+            });
         }
 
         // Find all items and return them
@@ -20,10 +22,12 @@ module.exports = function (req, res) {
             if (err) {
                 console.log('Error finding items in collection');
                 console.log(err);
-                return err;
+                res.json({
+                    error: err
+                });
             }
 
-            res.send(items);
+            res.json(items);
         });
     });
 

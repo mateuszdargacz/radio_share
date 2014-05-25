@@ -1,3 +1,29 @@
+'use strict';
+/* jshint camelcase: false */
+
+// Dependencies
+var appConfig = require('./index').appConfig,
+    mongo = require('mongodb');
+
+var server = new mongo.Server(appConfig.database.host, appConfig.database.port, { auto_reconnect: true }),
+    client = module.exports.client = new mongo.MongoClient(server);
+
+
+module.exports.get_user = function (req, res) {
+    client.open(function (err, client) {
+        if (err) {
+            console.log('Database connection error\nis mongod running?');
+            console.log(err);
+            res.json({
+                error: true,
+                text: err
+            });
+        }
+        console.log('Database connection to ' + client.db(appConfig.database.name).databaseName);
+
+
+    });
+};
 //'use strict';
 //
 //var appConfig   = require( '../../app-config.json' ),

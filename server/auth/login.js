@@ -3,15 +3,22 @@ var passport = require('./../server').passport;
 module.exports = function (req, res) {
     passport.authenticate('local', function (err, user) {
         if (req.body) {
+
             if (err) {
-                return res.json({ error: err.message });
+                return res.json({
+                    error: true,
+                    text: err });
             }
             if (!user) {
-                return res.json({ error: "You shall not pass..."});
+                return res.json({
+                    error: true,
+                    text: "You Shall not pass..." });
             }
             req.login(user, {}, function (err) {
                 if (err) {
-                    return res.json({error: err});
+                    return res.json({
+                        error: true,
+                        text: err });
                 }
                 return res.json(
                     { user: {
