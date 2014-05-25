@@ -33,14 +33,24 @@ passport.deserializeUser(function (obj, done) {
 
 passport.use(new LocalStrategy(
     function (username, password, done) {
-        if ((username === 'admin') && (password === 'tajne')) {
-            return done(null, {
+        var get_user = require("./db/get_users").get_user;
+        console.log("Auth")
+        get_user({
                 username: username,
                 password: password
+            },
+            function (data) {
+                console.log("IN callback");
+                console.log(data)
+                if (data.error === false && data.user != undefined) {
+                    return done(null, {
+                        username: data.username,
+                        password: data.password
+                    });
+                } else {
+                    return done(null, false);
+                }
             });
-        } else {
-            return done(null, false);
-        }
     }
 ));
 

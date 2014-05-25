@@ -3,7 +3,6 @@ var passport = require('./../server').passport;
 module.exports = function (req, res) {
     passport.authenticate('local', function (err, user) {
         if (req.body) {
-
             if (err) {
                 return res.json({
                     error: true,
